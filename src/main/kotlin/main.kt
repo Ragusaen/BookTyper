@@ -1,5 +1,5 @@
 import tornadofx.launch
 
-fun main() {
-    launch<BookTyperApp>()
+fun main(args: Array<String>) {
+    launch<BookTyperApp>(args)
 }
