@@ -1,5 +1,7 @@
 package Model
 
-class Book {
-    val epubData: Double = 0.0
+import nl.siegmann.epublib.domain.Book
+
+class Book(val title: String, val epubData: Book) {
+
 }

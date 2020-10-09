@@ -1,17 +1,22 @@
 package View
 
 import Control.MainController
+import Model.Book
 import com.sun.tools.javac.Main
 import javafx.scene.Parent
-import tornadofx.View
-import tornadofx.vbox
+import tornadofx.*
 
 class MainView : View() {
     override val root = vbox()
 
-    val controller:MainController by inject()
+    private val controller:MainController by inject()
 
-    val books = controller.getLocalBooks()
+    private val books = controller.getLocalBooks().observable()
 
-
+    init {
+        label("All books")
+        tableview(books) {
+            readonlyColumn("Title", Book::title)
+        }
+    }
 }

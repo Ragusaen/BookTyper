@@ -1,7 +1,9 @@
 package Control
 
+import Model.Book
+
 class MainController() {
-    fun getLocalBooks() {
+    fun getLocalBooks(): List<Book> {
         TODO("Please Implement")
     }
 }
