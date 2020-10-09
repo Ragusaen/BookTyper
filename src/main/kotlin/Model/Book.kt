@@ -1,5 +1,5 @@
 package Model
 
 class Book {
-    val epubData: Epub
+    val epubData: Double = 0.0
 }
