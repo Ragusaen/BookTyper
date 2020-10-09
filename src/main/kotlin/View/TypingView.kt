@@ -1,9 +1,6 @@
 package View
 
-import Model.ErrorCorrectionHighlighter
-import Model.ITextDeliverer
-import Model.ITypingTextHighlighter
-import Model.LoremIpsumTextDeliverer
+import Model.*
 import View.styles.GeneralStyle
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.property.SimpleStringProperty
@@ -12,10 +9,12 @@ import javafx.geometry.Orientation
 import javafx.geometry.Pos
 import javafx.scene.text.Font
 import tornadofx.*
+import java.io.File
+import java.io.FileInputStream
 
 class TypingView : View() {
 
-    val textDeliverer: ITextDeliverer = LoremIpsumTextDeliverer()//by param()
+    val textDeliverer: ITextDeliverer = BookTextDeliverer(FileInputStream(File("/home/ragusa/Downloads/pg63400.epub")))
 
     val textHighlighter = ErrorCorrectionHighlighter()
 
