@@ -12,7 +12,7 @@ import java.io.FileInputStream
 
 class TypingView : View() {
 
-    val textDeliverer: ITextDeliverer = LoremIpsumTextDeliverer()//BookTextDeliverer(FileInputStream(File("/home/ragusa/Downloads/pg63400.epub")))
+    val textDeliverer: ITextDeliverer = LoremIpsumTextDeliverer()// BookTextDeliverer(FileInputStream(File("C:\\Users\\Ragusa\\Documents\\bokyper\\(Mistborn 1) Sanderson, Brandon - Mistborn-The Final Empire.epub")))
 
     val textHighlighter = ErrorCorrectionHighlighter()
 
