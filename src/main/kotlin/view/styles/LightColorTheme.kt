@@ -1,6 +1,5 @@
-package View.styles
+package view.styles
 
-import javafx.scene.paint.Color
 import tornadofx.*
 
 class LightColorTheme : IColorTheme {

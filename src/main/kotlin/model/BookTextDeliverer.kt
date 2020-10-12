@@ -1,4 +1,4 @@
-package Model
+package model
 
 import nl.siegmann.epublib.domain.Book as EpubBook
 import nl.siegmann.epublib.domain.Resource

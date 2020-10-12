@@ -1,10 +1,8 @@
-package View
+package view
 
-import Model.*
-import View.styles.GeneralStyle
-import javafx.beans.property.SimpleObjectProperty
+import model.*
+import view.styles.GeneralStyle
 import javafx.beans.property.SimpleStringProperty
-import javafx.collections.ObservableList
 import javafx.geometry.Orientation
 import javafx.geometry.Pos
 import javafx.scene.text.Font
@@ -14,7 +12,7 @@ import java.io.FileInputStream
 
 class TypingView : View() {
 
-    val textDeliverer: ITextDeliverer = BookTextDeliverer(FileInputStream(File("/home/ragusa/Downloads/pg63400.epub")))
+    val textDeliverer: ITextDeliverer = LoremIpsumTextDeliverer()//BookTextDeliverer(FileInputStream(File("/home/ragusa/Downloads/pg63400.epub")))
 
     val textHighlighter = ErrorCorrectionHighlighter()
 

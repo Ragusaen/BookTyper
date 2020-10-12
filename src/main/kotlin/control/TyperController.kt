@@ -1,11 +1,9 @@
-package Control
+package control
 
-import Model.ITextDeliverer
-import Model.ITypingTextHighlighter
-import javafx.application.Platform
+import model.ITextDeliverer
+import model.ITypingTextHighlighter
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
-import kotlin.math.max
 
 class TyperController(val textDeliverer: ITextDeliverer, val typingTextHighlighter: ITypingTextHighlighter) {
     val inputTextProperty = SimpleStringProperty("")

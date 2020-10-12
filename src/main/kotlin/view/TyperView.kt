@@ -1,17 +1,13 @@
-package View
+package view
 
-import Control.TyperController
-import Model.*
-import View.styles.GeneralStyle
+import control.TyperController
+import model.*
+import view.styles.GeneralStyle
 import javafx.application.Platform
-import javafx.beans.property.SimpleStringProperty
-import javafx.geometry.Insets
-import javafx.geometry.Pos
 import javafx.scene.input.KeyEvent
 import javafx.scene.layout.*
 import javafx.scene.paint.Color
 import javafx.scene.text.Font
-import javafx.scene.text.Text
 import javafx.scene.text.TextFlow
 import tornadofx.*
 

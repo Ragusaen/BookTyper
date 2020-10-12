@@ -1,4 +1,4 @@
-package Model
+package model
 
 data class HighlightedTextSegment(val text: String, val highlight: TextHighlight)
 

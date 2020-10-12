@@ -1,7 +1,6 @@
-package View.styles
+package view.styles
 
 import javafx.scene.paint.Color
-import tornadofx.*
 
 interface IColorTheme {
     val background: Color

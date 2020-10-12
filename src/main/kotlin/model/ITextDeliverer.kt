@@ -1,4 +1,4 @@
-package Model
+package model
 
 interface ITextDeliverer {
     val title: String

@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="BookTyper" target="11" />
+      <module name="mainModule" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
