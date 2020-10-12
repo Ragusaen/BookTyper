@@ -1,4 +1,4 @@
-package Model
+package model
 
 class LoremIpsumTextDeliverer : ITextDeliverer {
     override val title: String

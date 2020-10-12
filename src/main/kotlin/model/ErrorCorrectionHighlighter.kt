@@ -1,4 +1,4 @@
-package Model
+package model
 
 import java.lang.Integer.min
 
@@ -22,5 +22,5 @@ class ErrorCorrectionHighlighter : ITypingTextHighlighter {
     }
 
     override fun currentWordCorrect(startIndex: Int, current: String): Boolean =
-            text.substring(startIndex, startIndex + current.length) == current
+            text.substring(min(text.length, startIndex), min(text.length, startIndex + current.length)) == current
 }

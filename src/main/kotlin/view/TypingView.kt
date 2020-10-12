@@ -1,21 +1,18 @@
-package View
+package view
 
-import Model.ErrorCorrectionHighlighter
-import Model.ITextDeliverer
-import Model.ITypingTextHighlighter
-import Model.LoremIpsumTextDeliverer
-import View.styles.GeneralStyle
-import javafx.beans.property.SimpleObjectProperty
+import model.*
+import view.styles.GeneralStyle
 import javafx.beans.property.SimpleStringProperty
-import javafx.collections.ObservableList
 import javafx.geometry.Orientation
 import javafx.geometry.Pos
 import javafx.scene.text.Font
 import tornadofx.*
+import java.io.File
+import java.io.FileInputStream
 
 class TypingView : View() {
 
-    val textDeliverer: ITextDeliverer = LoremIpsumTextDeliverer()//by param()
+    val textDeliverer: ITextDeliverer = LoremIpsumTextDeliverer()//BookTextDeliverer(FileInputStream(File("/home/ragusa/Downloads/pg63400.epub")))
 
     val textHighlighter = ErrorCorrectionHighlighter()
 
