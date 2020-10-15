@@ -11,12 +11,12 @@ import javafx.scene.text.Font
 import javafx.scene.text.TextFlow
 import tornadofx.*
 
-class TyperScope(val textDeliverer: ITextDeliverer, val textHighlighter: ITypingTextHighlighter) : Scope()
+class TyperScope(val textDeliverer: ITextDeliverer, val textHighlighter: ITypingTextHighlighter, val updateMetaText: (String) -> Unit) : Scope()
 
 class TyperView() : View() {
     override val scope = super.scope as TyperScope
 
-    val controller = TyperController(scope.textDeliverer, scope.textHighlighter)
+    val controller = TyperController(scope.textDeliverer, scope.textHighlighter, scope.updateMetaText)
 
     override val root = VBox()
 
@@ -27,23 +27,26 @@ class TyperView() : View() {
                 TextHighlight.Upcoming -> Color.GRAY
             }
 
+
+    lateinit var typeText: TextFlow
+
     init {
         with(root) {
-            minWidth = 200.0
+            minWidth = 500.0
             maxWidth = 1000.0
+            maxHeight = 600.0
 
-            style {
-                backgroundColor += GeneralStyle.colorTheme.background
-            }
-
-            lateinit var typeText: TextFlow
             vbox {
                 border = Border(BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT))
-                paddingAll = 5.0
 
-                typeText = textflow()
+                typeText = textflow() {
+                    paddingAll = 5.0
+                    style(append = true) {
+                        backgroundColor += Color.WHITE
+                    }
+                }
             }
-            updateTypeText(typeText)
+            updateTypeText()
 
             textfield(controller.inputTextProperty) {
 
@@ -51,14 +54,14 @@ class TyperView() : View() {
                     // Run later to wait for textfield to update
                     Platform.runLater {
                         controller.updateText(it.character.first())
-                        updateTypeText(typeText)
+                        updateTypeText()
                     }
                 }
             }
         }
     }
 
-    fun updateTypeText(typeText: TextFlow) {
+    fun updateTypeText() {
         typeText.children.clear()
 
         for (htext in controller.highlightedTextSegments.filter { it.text.isNotEmpty() }) {

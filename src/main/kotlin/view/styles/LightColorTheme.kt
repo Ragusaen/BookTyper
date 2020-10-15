@@ -3,7 +3,7 @@ package view.styles
 import tornadofx.*
 
 class LightColorTheme : IColorTheme {
-    override val background = c("#FAF9F9")
+    override val background = c("#FCF6EE")
     override val contrast = c("#F0544F")
     override val foreground = c("#344055")
     override val alternative = c("#9AD6D2")

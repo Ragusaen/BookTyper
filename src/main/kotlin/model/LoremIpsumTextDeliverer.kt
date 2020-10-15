@@ -8,5 +8,8 @@ class LoremIpsumTextDeliverer : ITextDeliverer {
         get() = "One of one"
 
     override fun next(): String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet sollicitudin erat. Cras eu mi gravida, aliquet dui ut, varius neque"
+    override fun skipChapter() {}
+
+    override val save: () -> Unit = {}
 
 }

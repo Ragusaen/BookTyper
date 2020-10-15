@@ -2,6 +2,9 @@ package model
 
 import nl.siegmann.epublib.domain.Book
 
-class Book(val title: String, val epubData: Book) {
-
-}
+data class Book(val title: String,
+                val bookPath: String,
+                val coverPath: String,
+                var contentsIndex: Int,
+                var sectionIndex: Int
+)

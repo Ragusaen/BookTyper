@@ -5,7 +5,7 @@ import model.ITypingTextHighlighter
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 
-class TyperController(val textDeliverer: ITextDeliverer, val typingTextHighlighter: ITypingTextHighlighter) {
+class TyperController(val textDeliverer: ITextDeliverer, val typingTextHighlighter: ITypingTextHighlighter, val updateMetaText: (String) -> Unit) {
     val inputTextProperty = SimpleStringProperty("")
     private var inputText by inputTextProperty
 
@@ -18,9 +18,10 @@ class TyperController(val textDeliverer: ITextDeliverer, val typingTextHighlight
         next()
     }
 
-    private fun next() {
+    fun next() {
         typedText = ""
         typingTextHighlighter.text = textDeliverer.next()
+        updateMetaText(textDeliverer.currentSection)
     }
 
     fun updateText(c: Char) {

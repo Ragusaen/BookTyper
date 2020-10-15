@@ -10,21 +10,33 @@ import tornadofx.*
 import java.io.File
 import java.io.FileInputStream
 
+class TypingScope(val textDeliverer: ITextDeliverer) : Scope()
+
 class TypingView : View() {
+    override val scope = super.scope as TypingScope
 
-    val textDeliverer: ITextDeliverer = LoremIpsumTextDeliverer()// BookTextDeliverer(FileInputStream(File("C:\\Users\\Ragusa\\Documents\\bokyper\\(Mistborn 1) Sanderson, Brandon - Mistborn-The Final Empire.epub")))
+    private val textHighlighter = ErrorCorrectionHighlighter()
 
-    val textHighlighter = ErrorCorrectionHighlighter()
+    private lateinit var typerView: TyperView
+
+    override fun onDock() {
+        with(currentStage!!) {
+            minWidth = 700.0
+            minHeight = 400.0
+        }
+    }
 
     override val root = vbox {
+        paddingAll = 25.0
+
         alignment = Pos.CENTER
 
-        label(SimpleStringProperty(textDeliverer.title)) {
+        label(SimpleStringProperty(scope.textDeliverer.title)) {
             style (append = true) {
                 font = Font(48.0)
             }
         }
-        label(SimpleStringProperty(textDeliverer.currentSection)) {
+        val chapterLabel = label("Chapter") {
             style (append = true) {
                 font = Font(32.0)
             }
@@ -39,9 +51,19 @@ class TypingView : View() {
             }
         }
 
-        val typerScope = TyperScope(textDeliverer, textHighlighter)
-        this += find<TyperView>(typerScope)
+        val typerScope = TyperScope(scope.textDeliverer, textHighlighter) { chapterName ->
+            chapterLabel.text = chapterName
+        }
+        typerView = find(typerScope)
+        this += typerView
 
+        button("Skip chapter") {
+            action {
+                scope.textDeliverer.skipChapter()
+                typerView.controller.next()
+                typerView.updateTypeText()
+            }
+        }
     }
 
 }
