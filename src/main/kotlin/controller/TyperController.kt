@@ -1,8 +1,9 @@
-package control
+package controller
 
 import model.ITextDeliverer
 import model.ITypingTextHighlighter
 import javafx.beans.property.SimpleStringProperty
+import model.UserData
 import tornadofx.*
 
 class TyperController(val textDeliverer: ITextDeliverer, val typingTextHighlighter: ITypingTextHighlighter, val updateMetaText: (String) -> Unit) {
@@ -14,14 +15,21 @@ class TyperController(val textDeliverer: ITextDeliverer, val typingTextHighlight
 
     val highlightedTextSegments get() = typingTextHighlighter.highlightedSegments(typedText + inputText)
 
+    val updates = mutableListOf<(TyperController) -> Unit>()
+
     init {
-        next()
+        next(advanceText = false)
     }
 
-    fun next() {
+    fun next(wasTyped: Boolean = false, advanceText: Boolean = true) {
+        if (wasTyped)
+            UserData.current.totalCharactersTyped += typedText.length
+
         typedText = ""
-        typingTextHighlighter.text = textDeliverer.next()
+        typingTextHighlighter.text = textDeliverer.next(advanceText)
         updateMetaText(textDeliverer.currentSection)
+
+        updates.forEach { it.invoke(this) }
     }
 
     fun updateText(c: Char) {
@@ -32,7 +40,7 @@ class TyperController(val textDeliverer: ITextDeliverer, val typingTextHighlight
             inputText = ""
 
             if (typedText.length == typingTextHighlighter.text.length)
-                next()
+                next(true)
         }
     }
 

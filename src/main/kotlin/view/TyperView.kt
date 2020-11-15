@@ -1,8 +1,7 @@
 package view
 
-import control.TyperController
+import controller.TyperController
 import model.*
-import view.styles.GeneralStyle
 import javafx.application.Platform
 import javafx.scene.input.KeyEvent
 import javafx.scene.layout.*
@@ -34,6 +33,7 @@ class TyperView() : View() {
         with(root) {
             minWidth = 500.0
             maxWidth = 1000.0
+            minHeight = 500.0
             maxHeight = 600.0
 
             vbox {

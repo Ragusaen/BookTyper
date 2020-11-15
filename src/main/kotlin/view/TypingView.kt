@@ -57,11 +57,35 @@ class TypingView : View() {
         typerView = find(typerScope)
         this += typerView
 
-        button("Skip chapter") {
-            action {
-                scope.textDeliverer.skipChapter()
-                typerView.controller.next()
-                typerView.updateTypeText()
+        hbox {
+            button("Previous section") {
+                action {
+                    scope.textDeliverer.previous()
+                    typerView.controller.next(advanceText = false)
+                    typerView.updateTypeText()
+                }
+            }
+
+            button("Skip chapter") {
+                action {
+                    scope.textDeliverer.skipChapter()
+                    typerView.controller.next(advanceText = false)
+                    typerView.updateTypeText()
+                }
+            }
+        }
+
+
+
+        hbox {
+            alignment = Pos.CENTER
+
+            label("${typerView.controller.textDeliverer.sectionProgress}") {
+                typerView.controller.updates += { this.text = "${it.textDeliverer.sectionProgress}"}
+
+                style(append = true) {
+                    font = Font(32.0)
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-package control
+package controller
 
 import com.google.gson.Gson
 import javafx.stage.FileChooser
@@ -16,12 +16,14 @@ class TextSelectionController {
 
         val epubBook = EpubReader().readEpub(file.inputStream())
 
-        val coverImage = File("${OS.appdataPath}covers/${epubBook.title}${userData.bookCount}${epubBook.coverImage.mediaType.defaultExtension}")
+        val coverImage = File("${OS.appdataPath}covers/${epubBook.title}${UserData.current.bookCount}${epubBook.coverImage.mediaType.defaultExtension}")
+        UserData.current.bookCount++
+
 
         coverImage.createNewFile()
         coverImage.writeBytes(epubBook.coverImage.data)
 
-        userData.books.add(Book(
+        UserData.current.books.add(Book(
                 epubBook.title,
                 file.absolutePath,
                 coverImage.absolutePath,
@@ -29,25 +31,6 @@ class TextSelectionController {
                 0
         ))
 
-        saveUserData()
-    }
-
-    val userData: UserData
-
-    private val userDataFile = File("${OS.appdataPath}user.data")
-
-    fun saveUserData() {
-        userDataFile.writeText(Gson().toJson(userData))
-    }
-
-    init {
-        if (!userDataFile.exists()) {
-            userData = UserData.Default
-            val coversDir = File("${OS.appdataPath}covers")
-            if (!coversDir.exists())
-                coversDir.mkdirs()
-        } else {
-            userData = Gson().fromJson(userDataFile.reader(), UserData::class.java)
-        }
+        UserData.saveCurrent()
     }
 }

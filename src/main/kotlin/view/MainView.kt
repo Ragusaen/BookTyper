@@ -1,6 +1,6 @@
 package view
 
-import control.MainController
+import controller.MainController
 import model.Book
 import tornadofx.*
 

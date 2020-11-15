@@ -1,21 +1,16 @@
 package view
 
-import control.TextSelectionController
+import controller.TextSelectionController
 import javafx.geometry.Pos
-import javafx.scene.Parent
 import javafx.scene.image.Image
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import javafx.scene.text.Font
-import javafx.stage.FileChooser
 import model.Book
 import model.BookTextDeliverer
 import model.UserData
 import tornadofx.*
-import java.awt.event.MouseEvent
-import java.io.File
 import java.io.FileInputStream
-import javax.imageio.ImageIO
 
 class TextSelectionView : View() {
     override val root = VBox()
@@ -32,7 +27,7 @@ class TextSelectionView : View() {
 
             val updateBooks = {
                 booksBox.clear()
-                for (book in controller.userData.books)
+                for (book in UserData.current.books)
                     booksBox.add(bookElement(book))
             }
             updateBooks()
@@ -67,6 +62,6 @@ class TextSelectionView : View() {
     }
 
     private fun chooseText(book: Book) {
-        replaceWith(find<TypingView>(TypingScope(BookTextDeliverer(book, controller::saveUserData))))
+        replaceWith(find<TypingView>(TypingScope(BookTextDeliverer(book))))
     }
 }
