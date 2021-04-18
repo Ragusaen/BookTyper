@@ -4,7 +4,7 @@ import controller.MainController
 import model.Book
 import tornadofx.*
 
-class MainView : View() {
+class MainView : View("BookTyper") {
     override val root = vbox()
 
     private val controller:MainController by inject()

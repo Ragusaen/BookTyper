@@ -15,7 +15,7 @@ import model.UserData
 import tornadofx.*
 import java.io.FileInputStream
 
-class TextSelectionView : View() {
+class TextSelectionView : View("BookTyper") {
     override val root = VBox()
 
     val controller = TextSelectionController()
