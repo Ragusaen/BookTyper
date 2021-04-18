@@ -37,7 +37,6 @@ class TextSelectionView : View() {
             }
             updateBooks()
 
-            println(this::class.java.getResource("/addbook.png").path)
             add(bookElement("Add new book", Image(this.javaClass.getResourceAsStream("/addbook.png")),
                 {controller.addBook(); updateBooks()}))
 

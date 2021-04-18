@@ -42,7 +42,7 @@ class BookTextDeliverer(val book: Book) : ITextDeliverer {
             field = if (value < 0) {
                 contentIndex--
                 texts.size - 1
-            } else if (value >= texts.size) {
+            } else if (value >= texts.size && texts.size != 0) {
                 contentIndex++
                 0
             } else
