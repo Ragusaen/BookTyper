@@ -16,7 +16,7 @@ class TextSelectionController {
 
         val epubBook = EpubReader().readEpub(file.inputStream())
 
-        val coverImage = File("${OS.appdataPath}covers/${epubBook.title}${UserData.current.bookCount}${epubBook.coverImage.mediaType.defaultExtension}")
+        val coverImage = File("${OS.appdataPath}covers/${epubBook.title.replace("[/\\\\?%*:|\"<>]".toRegex(), "-")}${UserData.current.bookCount}${epubBook.coverImage.mediaType.defaultExtension}")
         UserData.current.bookCount++
 
 
